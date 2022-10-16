@@ -12,6 +12,7 @@ public class CollisionHandler : MonoBehaviour
         playerHealth_script = FindObjectOfType<PlayerHealth>();
     }
 
+    PlayerHealth playerHealth_script;
     void reduce_health()
     {
         bool is_dead = playerHealth_script.reduceHealth(reduction_on_bump);
@@ -35,6 +36,7 @@ public class CollisionHandler : MonoBehaviour
 
             case "obstacle":
                 Debug.Log("reducing HP");
+                reduce_health();
                 break;
 
             case "friendly":
