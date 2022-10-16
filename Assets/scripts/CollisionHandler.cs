@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class CollisionHandler : MonoBehaviour
-{  
 
+<<<<<<< Updated upstream
+public class CollisionHandler : MonoBehaviour
+{
+=======
     PlayerHealth playerHealth_script;
     [SerializeField] float reduction_on_bump = 50f;
     
@@ -11,15 +12,19 @@ public class CollisionHandler : MonoBehaviour
         playerHealth_script = FindObjectOfType<PlayerHealth>();
     }
 
+    PlayerHealth playerHealth_script;
     void reduce_health()
     {
         bool is_dead = playerHealth_script.reduceHealth(reduction_on_bump);
         if (is_dead)
-        {
-            int current_scene_index = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(current_scene_index);
-        }
+            reload_scene();
     }
+    void reload_scene()
+    {
+        int current_scene_index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(current_scene_index);
+    }
+>>>>>>> Stashed changes
 
     private void OnCollisionEnter(Collision other) 
     {
@@ -40,7 +45,14 @@ public class CollisionHandler : MonoBehaviour
 
             default:
                 Debug.Log("not cool fam.");
-                SceneManager.LoadScene("SampleScene");
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+                reload_scene();
+>>>>>>> Stashed changes
+=======
+                reload_scene();
+>>>>>>> Stashed changes
                 break;
         }
 
