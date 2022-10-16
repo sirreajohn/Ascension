@@ -44,6 +44,10 @@ public class CollisionHandler : MonoBehaviour
             default:
                 Debug.Log("not cool fam.");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+                reload_scene();
+>>>>>>> Stashed changes
 =======
                 reload_scene();
 >>>>>>> Stashed changes
