@@ -5,19 +5,22 @@ public class CollisionHandler : MonoBehaviour
 
     PlayerHealth playerHealth_script;
     [SerializeField] float reduction_on_bump = 50f;
-    private void Awake() 
+    
+    private void Start() 
     {
         playerHealth_script = FindObjectOfType<PlayerHealth>();
     }
+
     void reduce_health()
     {
         bool is_dead = playerHealth_script.reduceHealth(reduction_on_bump);
         if (is_dead)
         {
-            Debug.Log("player is dead");
-            SceneManager.LoadScene("SampleScene");
+            int current_scene_index = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(current_scene_index);
         }
     }
+
     private void OnCollisionEnter(Collision other) 
     {
         switch(other.gameObject.tag)
