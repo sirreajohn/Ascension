@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float precise_factor;
     [SerializeField] float thrust_speed = 0f;
     [SerializeField] float torque_speed = 0f;
+    [SerializeField] AudioClip explosion;
     void Start()
     { 
         phys_engine = GetComponent<Rigidbody>();
@@ -20,6 +21,14 @@ public class Movement : MonoBehaviour
         processRotation();
     }
 
+    public void sound_explode_play()
+    {
+        AudioSource.PlayClipAtPoint(explosion, transform.position);
+    }
+    public void disable_audio()
+    {
+        audio_player.Stop();
+    }
     void processThrust()
     {
         if (Input.GetKey(KeyCode.Space))
