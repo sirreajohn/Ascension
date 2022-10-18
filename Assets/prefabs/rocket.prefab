@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reduction_on_bump: 50
+  reload_delay_time: 1
 --- !u!114 &4952477756073870150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,3 +270,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reduction_on_bump: 50
+  reload_delay_time: 2
