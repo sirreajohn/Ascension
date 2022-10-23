@@ -20,4 +20,9 @@ public class PlayerHealth : MonoBehaviour
             return false;
         }
     }
+
+    public float getHealth()
+    {
+        return player_health;
+    }
 }
