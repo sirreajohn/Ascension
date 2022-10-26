@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class CollisionHandler : MonoBehaviour
 {
     PlayerHealth playerHealth_script;
@@ -7,6 +8,7 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audio_player;
 
     bool not_crashed = true;
+    bool collision_on = true;
     [SerializeField] float reduction_on_bump = 50f;
     [SerializeField] float reload_delay_time = 2f;
     [SerializeField] AudioClip explosion;
@@ -14,6 +16,8 @@ public class CollisionHandler : MonoBehaviour
 
     [SerializeField] ParticleSystem crash_particles;
     [SerializeField] ParticleSystem success_particles;
+
+
 
     private void Start() 
     {
@@ -47,6 +51,7 @@ public class CollisionHandler : MonoBehaviour
 
     void start_crash_seq()
     {
+        playerHealth_script.kill_player();
         audio_player.Stop();
         audio_player.PlayOneShot(explosion);
         crash_particles.Play();
@@ -72,10 +77,15 @@ public class CollisionHandler : MonoBehaviour
         
         SceneManager.LoadScene(next_scene_index);
     }
+    
+    public void toggle_collision()
+    {
+        collision_on = !collision_on;
+    }
 
     private void OnCollisionEnter(Collision other) 
     {
-        if (not_crashed)
+        if (not_crashed && collision_on)
         {
             not_crashed = false;
             switch(other.gameObject.tag)
