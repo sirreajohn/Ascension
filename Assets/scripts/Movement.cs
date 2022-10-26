@@ -6,12 +6,13 @@ public class Movement : MonoBehaviour
 {
     Rigidbody phys_engine;
     AudioSource audio_player;  // audio is set to play on awake, it pauses and unpause on demand and is set to loop
+    PlayerFuel fuel_systems;
+    bool infinite_fuel = false;
+
     [SerializeField] float precise_factor;
     [SerializeField] float thrust_speed = 0f;
     [SerializeField] float torque_speed = 0f;
     [SerializeField] ParticleSystem thrust_particles;
-
-    PlayerFuel fuel_systems;
 
     void Start()
     { 
@@ -63,7 +64,8 @@ public class Movement : MonoBehaviour
         Vector3 thrust_direction = new Vector3(0, 1 * thrust_speed, 0);  // apply force only along Y-axis
         thrust_particles.Play();
         audio_player.UnPause();
-        fuel_systems.reduce_fuel();
+        if (!infinite_fuel)
+            fuel_systems.reduce_fuel();
         phys_engine.AddRelativeForce(thrust_direction * Time.deltaTime);
     }
 
@@ -85,6 +87,11 @@ public class Movement : MonoBehaviour
     {
         Vector3 torque = new Vector3(0, 0, 1 * torque_direction * (torque_speed * precise_factor));
         phys_engine.AddRelativeTorque(torque * Time.deltaTime);
+    }
+
+    public void toggle_infinite_fuel()
+    {
+        infinite_fuel = !infinite_fuel;
     }
 
 }

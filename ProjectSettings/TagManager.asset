@@ -6,6 +6,7 @@ TagManager:
   tags:
   - friendly
   - obstacle
+  - fuel
   layers:
   - Default
   - TransparentFX
