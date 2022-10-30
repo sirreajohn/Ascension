@@ -1,16 +1,30 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class CollisionHandler : MonoBehaviour
 {
     PlayerHealth playerHealth_script;
     Movement movement_script;
+    AudioSource audio_player;
+
+    bool not_crashed = true;
+    bool collision_on = true;
     [SerializeField] float reduction_on_bump = 50f;
     [SerializeField] float reload_delay_time = 2f;
-    
+    [SerializeField] AudioClip explosion;
+    [SerializeField] AudioClip next_level;
+
+    [SerializeField] ParticleSystem crash_particles;
+    [SerializeField] ParticleSystem success_particles;
+
+
+
     private void Start() 
     {
         playerHealth_script = FindObjectOfType<PlayerHealth>();
         movement_script = FindObjectOfType<Movement>();
+        audio_player = GetComponent<AudioSource>();
+
     }
 
     void reduce_health()
@@ -29,23 +43,28 @@ public class CollisionHandler : MonoBehaviour
     {
         load_scene(isnext: 1);
     }
+    void disable_movement()
+    {
+        if(movement_script.enabled)
+            movement_script.enabled = false;
+    }
+
     void start_crash_seq()
     {
-        // movement_script.disable_audio();
-        // add explosion after crash 
-        // add particle FX after crash
-        movement_script.enabled = false;
+        playerHealth_script.kill_player();
+        audio_player.Stop();
+        audio_player.PlayOneShot(explosion);
+        crash_particles.Play();
+        disable_movement();
         Invoke("load_same_scene", reload_delay_time);
     }
 
     void start_success_seq()
     {
-        // movement_script.disable_audio();
-        // add explosion after crash 
-        // add particle FX after crash
-        movement_script.enabled = false;
+        audio_player.PlayOneShot(next_level);
+        success_particles.Play();
+        disable_movement();
         Invoke("load_next_scene", reload_delay_time);
-
     }
 
     void load_scene(int isnext = 1)
@@ -58,29 +77,39 @@ public class CollisionHandler : MonoBehaviour
         
         SceneManager.LoadScene(next_scene_index);
     }
+    
+    public void toggle_collision()
+    {
+        collision_on = !collision_on;
+    }
 
     private void OnCollisionEnter(Collision other) 
     {
-        switch(other.gameObject.tag)
+        if (not_crashed && collision_on)
         {
-            case "Finish":
-                start_success_seq();
-                break;
+            not_crashed = false;
+            switch(other.gameObject.tag)
+            {
+                case "Finish":
+                    start_success_seq();
+                    break;
 
-            case "obstacle":
-                Debug.Log("reducing HP");
-                reduce_health();
-                break;
+                case "obstacle":
+                    Debug.Log("reducing HP");
+                    reduce_health();
+                    not_crashed = true;
+                    break;
 
-            case "friendly":
-                Debug.Log("bumped into a friendly");
-                break;
+                case "friendly":
+                    Debug.Log("bumped into a friendly");
+                    not_crashed = true;
+                    break;
 
-            default:
-                Debug.Log("not cool fam.");
-                // movement_script.sound_explode_play(); // delayed sound, fix this
-                start_crash_seq();
-                break;
+                default:
+                    Debug.Log("not cool fam.");
+                    start_crash_seq();
+                    break;
+            }
         }
 
     }

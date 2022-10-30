@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: launch
+  m_Name: obstacles_near
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _EMISSION
@@ -76,6 +76,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.27058825, g: 0.8113208, b: 0.3764706, a: 0.9529412}
-    - _EmissionColor: {r: 0.05882353, g: 0.62352943, b: 0.11764706, a: 1}
+    - _Color: {r: 0.8679245, g: 0.34187067, b: 0.33079386, a: 1}
+    - _EmissionColor: {r: 0.08872549, g: 0.011764706, b: 0.010784314, a: 1}
   m_BuildTextureStacks: []
