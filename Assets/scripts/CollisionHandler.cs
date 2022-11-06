@@ -52,7 +52,7 @@ public class CollisionHandler : MonoBehaviour
     void start_crash_seq()
     {
         playerHealth_script.kill_player();
-        audio_player.Stop();
+        // audio_player.Stop();
         audio_player.PlayOneShot(explosion);
         crash_particles.Play();
         disable_movement();

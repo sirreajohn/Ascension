@@ -312,10 +312,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 705507995, guid: 87991459ec081df42b31f98143d37c83, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.542
-      objectReference: {fileID: 0}
     - target: {fileID: 1969794062433242826, guid: 87991459ec081df42b31f98143d37c83, type: 3}
       propertyPath: m_Name
       value: rocket
