@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     PlayerHealth playerHealth_script;
-    Movement movement_script;
+    Movement_v2 movement_script;
     AudioSource audio_player;
 
     bool not_crashed = true;
@@ -22,7 +22,7 @@ public class CollisionHandler : MonoBehaviour
     private void Start() 
     {
         playerHealth_script = FindObjectOfType<PlayerHealth>();
-        movement_script = FindObjectOfType<Movement>();
+        movement_script = FindObjectOfType<Movement_v2>();
         audio_player = GetComponent<AudioSource>();
 
     }
