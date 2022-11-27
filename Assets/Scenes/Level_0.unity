@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.007207564, g: 0.007207564, b: 0.007207564, a: 1}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.006911361, g: 0.006911361, b: 0.006911361, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -634,11 +634,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5676225314198117861, guid: 85836d80f29c0c24b9484cd7bc3ffbd7, type: 3}
   m_PrefabInstance: {fileID: 1924248655}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &705507994 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 705507994, guid: 87991459ec081df42b31f98143d37c83, type: 3}
-  m_PrefabInstance: {fileID: 1969794062513459473}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &706294122 stripped
 Transform:
@@ -2167,6 +2162,10 @@ PrefabInstance:
       propertyPath: health_text
       value: 
       objectReference: {fileID: 877481319}
+    - target: {fileID: 6420847746200732914, guid: 87991459ec081df42b31f98143d37c83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6731296954185480048, guid: 87991459ec081df42b31f98143d37c83, type: 3}
       propertyPath: fuel_bar
       value: 

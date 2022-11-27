@@ -1,19 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class PlayerFuel : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("fuel items")]
     [SerializeField] float fuel = 100f;
     [SerializeField] float rate_of_consumption = 1f;
     [SerializeField] TMP_Text fuel_bar;
     [SerializeField] Slider fuel_silder;
+
+    [Header("boost items")]
+    [SerializeField] float boost_time;
+    [SerializeField] float boost_multiplier = 1f;  // basically same speed
+
     float max_fuel;
-    Movement movement_script;
+    Movement_v2 movement_script;
     private void Start() 
     {
-        movement_script = FindObjectOfType<Movement>();    
+        movement_script = FindObjectOfType<Movement_v2>();    
         max_fuel = fuel;
     }
 
@@ -44,13 +51,25 @@ public class PlayerFuel : MonoBehaviour
     {
         update_fuel_bar();
     }
-
+    IEnumerator trigger_boost_event()
+    {
+        movement_script.set_thurst_speed(boost_multiplier);
+        yield return new WaitForSeconds(boost_time);
+        movement_script.reset_thrust_speed();
+    }
+    
+    // pickup behaviors
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.tag == "fuel")
+        string collision_tag = other.gameObject.tag;
+        Destroy(other.gameObject);
+        if (collision_tag == "fuel")
         {
-            fuel = max_fuel;
-            Destroy(other.gameObject);
+            fuel = max_fuel; 
+        }
+        else if (collision_tag == "boost")
+        {
+            StartCoroutine(trigger_boost_event());
         }
     }
 }
